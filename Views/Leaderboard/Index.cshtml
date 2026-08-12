@@ -1,0 +1,41 @@
+@model List<LeaderboardRedisMvc.Models.LeaderboardEntry>
+
+@{
+    ViewData["Title"] = "Ranking";
+}
+
+<h1>Ranking (top 10)</h1>
+
+<form asp-action="AddScore" method="post" class="row g-2 mb-4">
+    <div class="col-auto">
+        <input type="text" name="player" class="form-control" placeholder="Jogador" required />
+    </div>
+    <div class="col-auto">
+        <input type="number" name="points" class="form-control" placeholder="Pontos" step="any" required />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Enviar pontuação</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Jogador</th>
+            <th>Pontuação</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var entry in Model)
+    {
+        <tr>
+            <td>@entry.Rank</td>
+            <td>@entry.Player</td>
+            <td>@entry.Score</td>
+            <td><a asp-action="Player" asp-route-name="@entry.Player" class="btn btn-sm btn-secondary">Perfil</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

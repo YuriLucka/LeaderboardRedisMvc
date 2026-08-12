@@ -1,0 +1,36 @@
+@model LeaderboardRedisMvc.Models.PlayerProfile
+
+@{
+    ViewData["Title"] = $"Perfil de {Model.Player}";
+    bool fromCache = ViewBag.FromCache;
+}
+
+<h1>Perfil: @Model.Player</h1>
+
+<div class="alert @(fromCache ? "alert-info" : "alert-warning")">
+    @if (fromCache)
+    {
+        <text>Veio do cache Redis (calculado em @Model.ComputedAt.ToLocalTime(), expira em 30s desde então).</text>
+    }
+    else
+    {
+        <text>Calculado agora (simulou consulta lenta de ~1.5s) e guardado no cache Redis por 30s.</text>
+    }
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Posição no ranking</dt>
+    <dd class="col-sm-9">@Model.Rank</dd>
+
+    <dt class="col-sm-3">Pontuação</dt>
+    <dd class="col-sm-9">@Model.Score</dd>
+
+    <dt class="col-sm-3">Partidas jogadas</dt>
+    <dd class="col-sm-9">@Model.MatchesPlayed</dd>
+
+    <dt class="col-sm-3">Taxa de vitória</dt>
+    <dd class="col-sm-9">@Model.WinRate%</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>
+<p class="mt-3"><small>Atualiza a página em menos de 30s pra ver "veio do cache"; espera mais de 30s pra ver recalcular.</small></p>

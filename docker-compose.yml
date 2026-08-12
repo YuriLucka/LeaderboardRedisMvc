@@ -1,0 +1,21 @@
+services:
+  redis:
+    image: redis:7
+    container_name: leaderboardredis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: leaderboardredis-commander
+    depends_on:
+      - redis
+    ports:
+      - "8082:8081"
+    environment:
+      REDIS_HOSTS: "local:redis:6379"
+
+volumes:
+  redis-data:
