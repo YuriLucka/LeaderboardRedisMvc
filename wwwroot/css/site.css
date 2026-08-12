@@ -3,6 +3,10 @@
    lidos como dado, não como texto corrido. */
 
 :root {
+    /* Pico sobe pra 125% em telas largas (>=1280px); trava um valor fixo menor
+       pra não parecer "com zoom" em monitor comum. */
+    --pico-font-size: 87.5%;
+
     --pico-font-family-sans-serif: system-ui, "Segoe UI", Roboto, sans-serif;
     --pico-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
@@ -49,9 +53,9 @@ body {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    padding: 2rem 0 1rem;
+    padding: 1.5rem 0 1rem;
     border-bottom: 1px solid var(--pico-muted-border-color);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .app-header h1 {
@@ -100,6 +104,25 @@ table .rank-cell {
     font-family: var(--pico-font-family-monospace);
     font-weight: 700;
     width: 3rem;
+}
+
+/* Lista rola dentro dessa caixa; o resto da página fica parado no lugar */
+.table-scroll {
+    max-height: calc(100vh - 16rem);
+    overflow-y: auto;
+    border: 1px solid var(--pico-muted-border-color);
+    border-radius: var(--pico-border-radius);
+}
+
+.table-scroll table {
+    margin-bottom: 0;
+}
+
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: var(--pico-card-background-color);
+    z-index: 1;
 }
 
 tbody tr:nth-child(1) .rank-cell { color: var(--gold); }

@@ -22,25 +22,27 @@
 }
 else
 {
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Jogador</th>
-                <th>Pontuação</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var entry in Model)
-        {
-            <tr>
-                <td class="rank-cell">@entry.Rank</td>
-                <td>@entry.Player</td>
-                <td class="num">@entry.Score</td>
-                <td><a asp-action="Player" asp-route-name="@entry.Player" role="button" class="secondary outline">Perfil</a></td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Jogador</th>
+                    <th>Pontuação</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td class="rank-cell">@entry.Rank</td>
+                    <td>@entry.Player</td>
+                    <td class="num">@entry.Score</td>
+                    <td><a asp-action="Player" asp-route-name="@entry.Player" role="button" class="secondary outline">Perfil</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 }
