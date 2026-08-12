@@ -8,6 +8,7 @@ MVP de estudo: ASP.NET Core MVC + Redis. Mostra dois usos clássicos de Redis la
 - [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis) (client oficial .NET pra Redis)
 - Redis rodando em container Docker
 - [redis-commander](https://github.com/joeferner/redis-commander) — GUI web pra inspecionar as chaves
+- [Pico.css](https://picocss.com) (vendorizado localmente) + tema escuro próprio — visual "scoreboard" (top 3 do ranking em dourado/prata/bronze, badge de status do cache), sem Bootstrap/jQuery
 
 ## Estrutura
 

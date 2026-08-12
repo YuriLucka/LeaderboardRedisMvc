@@ -5,32 +5,37 @@
     bool fromCache = ViewBag.FromCache;
 }
 
-<h1>Perfil: @Model.Player</h1>
+<h2>@Model.Player</h2>
 
-<div class="alert @(fromCache ? "alert-info" : "alert-warning")">
-    @if (fromCache)
-    {
-        <text>Veio do cache Redis (calculado em @Model.ComputedAt.ToLocalTime(), expira em 30s desde então).</text>
-    }
-    else
-    {
-        <text>Calculado agora (simulou consulta lenta de ~1.5s) e guardado no cache Redis por 30s.</text>
-    }
+@if (fromCache)
+{
+    <span class="cache-badge hit"><span class="dot"></span> veio do cache — calculado @Model.ComputedAt.ToLocalTime().ToString("HH:mm:ss")</span>
+}
+else
+{
+    <span class="cache-badge miss"><span class="dot"></span> calculado agora (~1.5s) e guardado no cache por 30s</span>
+}
+
+<div class="stat-grid">
+    <div class="stat">
+        <span class="label">Posição</span>
+        <span class="value num">#@Model.Rank</span>
+    </div>
+    <div class="stat">
+        <span class="label">Pontuação</span>
+        <span class="value num">@Model.Score</span>
+    </div>
+    <div class="stat">
+        <span class="label">Partidas</span>
+        <span class="value num">@Model.MatchesPlayed</span>
+    </div>
+    <div class="stat">
+        <span class="label">Vitórias</span>
+        <span class="value num">@Model.WinRate%</span>
+    </div>
 </div>
 
-<dl class="row">
-    <dt class="col-sm-3">Posição no ranking</dt>
-    <dd class="col-sm-9">@Model.Rank</dd>
-
-    <dt class="col-sm-3">Pontuação</dt>
-    <dd class="col-sm-9">@Model.Score</dd>
-
-    <dt class="col-sm-3">Partidas jogadas</dt>
-    <dd class="col-sm-9">@Model.MatchesPlayed</dd>
-
-    <dt class="col-sm-3">Taxa de vitória</dt>
-    <dd class="col-sm-9">@Model.WinRate%</dd>
-</dl>
-
-<a asp-action="Index" class="btn btn-secondary">Voltar</a>
-<p class="mt-3"><small>Atualiza a página em menos de 30s pra ver "veio do cache"; espera mais de 30s pra ver recalcular.</small></p>
+<p>
+    <a asp-action="Index" role="button" class="secondary outline">← Ranking</a>
+</p>
+<p><small>Recarregue em menos de 30s pra ver "veio do cache"; espere mais e veja recalcular.</small></p>

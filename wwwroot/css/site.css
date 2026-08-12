@@ -1,31 +1,167 @@
-html {
-  font-size: 14px;
-}
+/* Tema "scoreboard": paleta escura sobre a base do Pico.css, com destaque
+   dourado (topo do ranking) e monoespaçada pra números — pontuação/rank
+   lidos como dado, não como texto corrido. */
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+:root {
+    --pico-font-family-sans-serif: system-ui, "Segoe UI", Roboto, sans-serif;
+    --pico-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    --pico-background-color: #0b0d12;
+    --pico-color: #e7e6e2;
+    --pico-h1-color: #f4f3f0;
+    --pico-h2-color: #f4f3f0;
+    --pico-muted-color: #8b93a5;
+    --pico-muted-border-color: #232838;
 
-html {
-  position: relative;
-  min-height: 100%;
+    --pico-card-background-color: #12151c;
+    --pico-card-border-color: #232838;
+    --pico-card-box-shadow: none;
+
+    --pico-table-border-color: #232838;
+    --pico-table-row-stripped-background-color: #10131a;
+
+    --pico-form-element-background-color: #12151c;
+    --pico-form-element-border-color: #2a3040;
+    --pico-form-element-color: #e7e6e2;
+    --pico-form-element-placeholder-color: #626a7a;
+
+    --pico-primary: #f2b134;
+    --pico-primary-background: #f2b134;
+    --pico-primary-border: #f2b134;
+    --pico-primary-hover: #ffc75c;
+    --pico-primary-hover-background: #ffc75c;
+    --pico-primary-hover-border: #ffc75c;
+    --pico-primary-inverse: #1a1305;
+    --pico-primary-focus: rgba(242, 177, 52, 0.35);
+
+    --gold: #f2b134;
+    --silver: #c7cdd6;
+    --bronze: #cd8a5c;
+    --cache-hit: #4fd1a5;
+    --cache-miss: #f2794a;
 }
 
 body {
-  margin-bottom: 60px;
+    background: radial-gradient(ellipse at top, #14161d 0%, #0b0d12 55%);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.app-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 2rem 0 1rem;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+    margin-bottom: 2rem;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.app-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.eyebrow {
+    display: block;
+    font-family: var(--pico-font-family-monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+}
+
+.app-header .tech-tag {
+    font-family: var(--pico-font-family-monospace);
+    font-size: 0.75rem;
+    color: var(--pico-muted-color);
+}
+
+/* Formulário de pontuação em uma linha só */
+.score-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 0.75rem;
+    align-items: end;
+    margin-bottom: 2rem;
+}
+
+.score-form label {
+    font-size: 0.8rem;
+    color: var(--pico-muted-color);
+}
+
+/* Números do placar em monoespaçada, alinhados como dado tabular */
+.num {
+    font-family: var(--pico-font-family-monospace);
+    font-variant-numeric: tabular-nums;
+}
+
+table .rank-cell {
+    font-family: var(--pico-font-family-monospace);
+    font-weight: 700;
+    width: 3rem;
+}
+
+tbody tr:nth-child(1) .rank-cell { color: var(--gold); }
+tbody tr:nth-child(2) .rank-cell { color: var(--silver); }
+tbody tr:nth-child(3) .rank-cell { color: var(--bronze); }
+
+/* Badge de status do cache: o ponto central do projeto, precisa ser lido rápido */
+.cache-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    border: 1px solid var(--pico-muted-border-color);
+    background: var(--pico-card-background-color);
+}
+
+.cache-badge .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    flex: none;
+}
+
+.cache-badge.hit .dot { background: var(--cache-hit); box-shadow: 0 0 8px var(--cache-hit); }
+.cache-badge.miss .dot { background: var(--cache-miss); box-shadow: 0 0 8px var(--cache-miss); }
+
+.cache-badge.hit { color: var(--cache-hit); }
+.cache-badge.miss { color: var(--cache-miss); }
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-grid .stat {
+    padding: 1rem;
+    border: 1px solid var(--pico-muted-border-color);
+    border-radius: var(--pico-border-radius);
+    background: var(--pico-card-background-color);
+}
+
+.stat-grid .stat .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pico-muted-color);
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.stat-grid .stat .value {
+    font-family: var(--pico-font-family-monospace);
+    font-size: 1.4rem;
+    color: var(--pico-h1-color);
+}
+
+@media (max-width: 600px) {
+    .score-form {
+        grid-template-columns: 1fr;
+    }
 }
