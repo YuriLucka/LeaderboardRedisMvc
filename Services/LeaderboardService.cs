@@ -18,8 +18,15 @@ public class LeaderboardService
 
     private IDatabase Db => _redis.GetDatabase();
 
-    public async Task<double> AddScoreAsync(string player, double points) =>
-        await Db.SortedSetIncrementAsync(_key, player, points);
+    public async Task<double> AddScoreAsync(string player, double points)
+    {
+        var newScore = await Db.SortedSetIncrementAsync(_key, player, points);
+
+        // Invalida o perfil cacheado: score/rank mudaram, próxima leitura deve recalcular.
+        await Db.KeyDeleteAsync(PlayerProfileService.CacheKey(player));
+
+        return newScore;
+    }
 
     public async Task<List<LeaderboardEntry>> GetTopAsync(int count)
     {

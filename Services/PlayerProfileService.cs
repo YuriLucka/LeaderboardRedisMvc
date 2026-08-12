@@ -21,7 +21,7 @@ public class PlayerProfileService
 
     private IDatabase Db => _redis.GetDatabase();
 
-    private static string CacheKey(string player) => $"profile:{player}";
+    public static string CacheKey(string player) => $"profile:{player}";
 
     public async Task<(PlayerProfile Profile, bool FromCache)> GetProfileAsync(string player)
     {
