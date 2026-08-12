@@ -1,5 +1,6 @@
-/* Tema "scoreboard": paleta escura sobre a base do Pico.css, com destaque
-   dourado (topo do ranking) e monoespaçada pra números — pontuação/rank
+/* Tema claro com o vermelho da marca Redis (#DC382D) como destaque —
+   fundo branco/cinza claro, texto escuro, acento vermelho nos botões,
+   links e no topo do ranking. Números em monoespaçada (rank/score),
    lidos como dado, não como texto corrido. */
 
 :root {
@@ -10,43 +11,43 @@
     --pico-font-family-sans-serif: system-ui, "Segoe UI", Roboto, sans-serif;
     --pico-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    --pico-background-color: #0b0d12;
-    --pico-color: #e7e6e2;
-    --pico-h1-color: #f4f3f0;
-    --pico-h2-color: #f4f3f0;
-    --pico-muted-color: #8b93a5;
-    --pico-muted-border-color: #232838;
+    --pico-background-color: #fafaf9;
+    --pico-color: #24262b;
+    --pico-h1-color: #17181b;
+    --pico-h2-color: #17181b;
+    --pico-muted-color: #6b7280;
+    --pico-muted-border-color: #e5e2df;
 
-    --pico-card-background-color: #12151c;
-    --pico-card-border-color: #232838;
+    --pico-card-background-color: #ffffff;
+    --pico-card-border-color: #e5e2df;
     --pico-card-box-shadow: none;
 
-    --pico-table-border-color: #232838;
-    --pico-table-row-stripped-background-color: #10131a;
+    --pico-table-border-color: #e5e2df;
+    --pico-table-row-stripped-background-color: #f6f5f3;
 
-    --pico-form-element-background-color: #12151c;
-    --pico-form-element-border-color: #2a3040;
-    --pico-form-element-color: #e7e6e2;
-    --pico-form-element-placeholder-color: #626a7a;
+    --pico-form-element-background-color: #ffffff;
+    --pico-form-element-border-color: #d8d5d1;
+    --pico-form-element-color: #24262b;
+    --pico-form-element-placeholder-color: #9a9da3;
 
-    --pico-primary: #f2b134;
-    --pico-primary-background: #f2b134;
-    --pico-primary-border: #f2b134;
-    --pico-primary-hover: #ffc75c;
-    --pico-primary-hover-background: #ffc75c;
-    --pico-primary-hover-border: #ffc75c;
-    --pico-primary-inverse: #1a1305;
-    --pico-primary-focus: rgba(242, 177, 52, 0.35);
+    --pico-primary: #dc382d;
+    --pico-primary-background: #dc382d;
+    --pico-primary-border: #dc382d;
+    --pico-primary-hover: #b92e25;
+    --pico-primary-hover-background: #b92e25;
+    --pico-primary-hover-border: #b92e25;
+    --pico-primary-inverse: #ffffff;
+    --pico-primary-focus: rgba(220, 56, 45, 0.25);
 
-    --gold: #f2b134;
-    --silver: #c7cdd6;
-    --bronze: #cd8a5c;
-    --cache-hit: #4fd1a5;
-    --cache-miss: #f2794a;
+    --gold: #b8860b;
+    --silver: #8a8f98;
+    --bronze: #b5651d;
+    --cache-hit: #1a9c5a;
+    --cache-miss: #d9550f;
 }
 
 body {
-    background: radial-gradient(ellipse at top, #14161d 0%, #0b0d12 55%);
+    background: #fafaf9;
 }
 
 .app-header {
@@ -70,14 +71,23 @@ body {
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--pico-primary);
     margin-bottom: 0.35rem;
 }
 
-.app-header .tech-tag {
-    font-family: var(--pico-font-family-monospace);
-    font-size: 0.75rem;
+.header-nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.header-nav a {
+    font-size: 0.85rem;
     color: var(--pico-muted-color);
+    text-decoration: none;
+}
+
+.header-nav a:hover {
+    color: var(--pico-primary);
 }
 
 /* Formulário de pontuação em uma linha só */

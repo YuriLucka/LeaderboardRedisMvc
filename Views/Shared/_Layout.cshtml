@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-theme="dark">
+<html lang="pt-br" data-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,10 @@
                 <span class="eyebrow">Redis · Sorted Set + Cache-Aside</span>
                 <h1><a asp-controller="Leaderboard" asp-action="Index" style="color: inherit; text-decoration: none;">Leaderboard</a></h1>
             </div>
-            <span class="tech-tag">ASP.NET Core MVC</span>
+            <nav class="header-nav">
+                <a asp-controller="Leaderboard" asp-action="Index">Ranking</a>
+                <a asp-controller="Home" asp-action="Index">Sobre</a>
+            </nav>
         </header>
 
         @RenderBody()

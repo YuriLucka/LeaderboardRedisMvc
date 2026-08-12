@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Sobre";
+}
+
+<h2>Sobre este projeto</h2>
+
+<p>
+    MVP de estudo pra ver o Redis funcionando de verdade dentro de um app ASP.NET Core MVC.
+    Sem autenticação, sem banco relacional por trás — o Redis aqui é a única fonte de dados,
+    usado de duas formas bem diferentes uma da outra.
+</p>
+
+<div class="stat-grid">
+    <div class="stat">
+        <span class="label">Ranking</span>
+        <span class="value" style="font-size: 1rem;">Sorted Set</span>
+        <p style="margin-top: 0.6rem; margin-bottom: 0;">
+            Cada jogador é membro de um <code>ZSET</code> com a pontuação como score.
+            O Redis mantém tudo ordenado sozinho — sem <code>ORDER BY</code>, sem índice.
+        </p>
+    </div>
+    <div class="stat">
+        <span class="label">Perfil do jogador</span>
+        <span class="value" style="font-size: 1rem;">Cache-aside</span>
+        <p style="margin-top: 0.6rem; margin-bottom: 0;">
+            Primeira leitura simula uma consulta lenta e guarda o resultado com TTL de 30s.
+            Mudou a pontuação? o cache daquele jogador é invalidado na hora.
+        </p>
+    </div>
+</div>
+
+<h3>Stack</h3>
+<ul>
+    <li>ASP.NET Core MVC (.NET 10)</li>
+    <li><a href="https://github.com/StackExchange/StackExchange.Redis" target="_blank" rel="noopener">StackExchange.Redis</a> — client oficial .NET, sem ORM</li>
+    <li>Redis + <a href="https://github.com/joeferner/redis-commander" target="_blank" rel="noopener">redis-commander</a> via Docker Compose</li>
+    <li><a href="https://picocss.com" target="_blank" rel="noopener">Pico.css</a> vendorizado localmente, sem build step</li>
+</ul>
+
+<h3>Como rodar</h3>
+<pre><code>docker compose up -d   # Redis (6379) + redis-commander (8082)
+dotnet run</code></pre>
+
+<h3>Projeto irmão</h3>
+<p>
+    Existe também o <a href="https://github.com/YuriLucka/TodoMongoMvc" target="_blank" rel="noopener">TodoMongoMvc</a>,
+    mesma ideia mas com MongoDB — dá pra comparar como cada banco NoSQL resolve um problema diferente:
+    Mongo guarda documento estruturado, Redis aqui vira estrutura de ranking e cache.
+</p>
+
+<p>
+    <a href="https://github.com/YuriLucka/LeaderboardRedisMvc" target="_blank" rel="noopener">Código-fonte no GitHub</a>
+</p>
