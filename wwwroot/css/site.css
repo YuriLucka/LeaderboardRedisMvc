@@ -4,7 +4,11 @@
    links e no topo do ranking. Números em monoespaçada (rank/score),
    lidos como dado, não como texto corrido. */
 
-:root {
+/* Pico define o tema claro em ":root:not([data-theme=dark]), [data-theme=light]"
+   — especificidade (0,2,0). Um ":root" puro (0,1,0) perde pra essa regra mesmo
+   vindo depois no cascade. Repete o atributo aqui pra igualar a especificidade
+   e garantir que essas variáveis vençam. */
+:root[data-theme="light"] {
     /* Pico sobe pra 125% em telas largas (>=1280px); trava um valor fixo menor
        pra não parecer "com zoom" em monitor comum. */
     --pico-font-size: 87.5%;
