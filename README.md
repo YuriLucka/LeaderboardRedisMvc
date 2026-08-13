@@ -55,6 +55,6 @@ Depois que o TTL expira, a chave some sozinha do Redis e a próxima leitura reca
 
 **Invalidação ativa no `AddScoreAsync`**: além do TTL de 30s, toda vez que a pontuação de um jogador muda, `AddScoreAsync` também apaga a chave `profile:{jogador}` (`KeyDeleteAsync`). Isso evita mostrar rank/score desatualizado enquanto o cache ainda não expirou — a próxima leitura do perfil recalcula na hora, mesmo antes do TTL estourar. Cache dos outros jogadores (que não mudaram) continua servindo normal.
 
-## Diferença pro projeto de Mongo
+## Diferença pros projetos irmãos
 
-O [TodoMongoMvc](https://github.com/YuriLucka/TodoMongoMvc) guarda documentos (dado estruturado, consulta por campo). Este projeto usa Redis como estrutura de dados em memória (Sorted Set) e como cache (String + TTL) — não é feito pra ser fonte de verdade de dados de negócio, e sim pra acelerar leituras e resolver problemas específicos (ranking, cache).
+O [TodoMongoMvc](https://github.com/YuriLucka/TodoMongoMvc) guarda documentos (dado estruturado, consulta por campo). Este projeto usa Redis como estrutura de dados em memória (Sorted Set) e como cache (String + TTL) — não é feito pra ser fonte de verdade de dados de negócio, e sim pra acelerar leituras e resolver problemas específicos (ranking, cache). Já o [SocialGraphMvc](https://github.com/YuriLucka/SocialGraphMvc) usa Neo4j pra travessia de relacionamento — problema que nem Mongo nem Redis resolvem bem.
